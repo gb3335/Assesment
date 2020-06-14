@@ -1,0 +1,57 @@
+
+    <div class="header">
+      <a href="#default" class="logo"><i class="far fa-file-word"></i> Google Docs</a>
+      <div width="100%" class="header-right">
+        <div class="click-to-top">
+          <img style="float:right;margin-left:15px" src="png/001-man.png" id="myPicture1" width="50px" height="50px">
+          <span><center><h1 class="mt-4">Dashboard</h1><p class="lead mb-3">Welcome <%= name %></p></center></span>
+        </div>
+        <a style="float:right;margin-left:5px" class="active" href="#share"><i class="fas fa-link"></i> Share</a>
+        <span style="float:right;margin-left:5px" class="dot"><center><h4 style="margin-top:10px; color:#f2f2f2" id="count">0</h4></center></span>
+
+        <span style="float:right;padding-left: 15px" id="imgsrc"></span>
+      </div>
+    </div>
+    <br><br>
+    <a style="float:right;margin-right:20px" href="/users/logout" class="btn btn-secondary">Logout</a>
+
+
+    <div class="container container-fluid col-8 offset-2">
+      <div class="row col-12">
+        <h2 class="col-4 offset-4 text-center pb-3">
+          <strong>Google <span>Docs</span></strong>
+        </h2>
+      </div>
+      <div class="row">
+        <div id="sidebar" class="col-3">
+          <p style="display:none">Rooms <span id="create-room">+</span></p>
+          <ul style="display:none" id="roomlist"></ul>
+          <p>Active Users List</p>
+          <ul id="userlist1"></ul>
+          <p><%= name %></p>
+        </div>
+        <div style="display:none" id="char-area" class="col-9">
+          <div class="row col-12">
+            <div id="chat-display" class="col-12">
+              <div id="msg"></div>
+            </div>
+          </div>
+
+          <div class="row col-12">
+            <input
+              class="col-10"
+              type="text"
+              id="message"
+              placeholder="Type your message"
+            />
+            <button class="col-2" id="send">Send</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div value="<%= name %>" style="display:none" id="username">
+      <%= name %>
+    </div>
+    <img style="float:right;margin-left:15px;display:none" src="png/001-man.png" id="myPicture" width="50px" height="50px">
+    <span style="float:right;padding-left: 15px;display:none" id="userlist"></span>
+    <br><br>
