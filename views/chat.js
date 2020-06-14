@@ -80,10 +80,10 @@ var j=0;
 socket.on("imgsrc1", function(imgadds) {
   imgsrc.innerHTML = "";
   for (var imsr in imgadds) {
-    if(j<6){
+    
       uname = uv[j];
       imgsrc.innerHTML += "<img src=\""+imsr+"\" width=\"50px\" height=\"50px\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\""+uname+"\">";//+" "+user;//"<img src=\"png/001-man.png\" id=\"myPicture\" width=\"50px\" height=\"50px\">"+user;
-    }
+    
     j++;
   }
 });
