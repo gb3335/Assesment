@@ -7,6 +7,11 @@ Multiple user based presence service
 2. Mongo DB
 3. Socket.io
 
+Requirment:
+
+1. npm
+2. node js
+
  Installetion of packages:
  
 => npm install
