@@ -1,5 +1,5 @@
 var socket = io.connect("http://localhost:5000");
-var userlist = document.getElementById("userlist");
+var userlist = document.getElementById("userlist1");
 var imgsrc = document.getElementById("imgsrc");
 var roomlist = document.getElementById("roomlist");
 var message = document.getElementById("message");
@@ -10,11 +10,12 @@ var chatDisplay = document.getElementById("chat-display");
 var imgadd;
 var userName = document.getElementById("username");
 window.onload = choosePic;
-var myPix = new Array("png/007-woman.png","png/008-man.png","png/009-girl.png","png/010-man.png","png/006-nurse.png","png/005-woman.png","png/004-man.png","png/001-man.png","png/002-woman.png","png/003-delivery man.png");
+var myPix = new Array("png/007-woman.png","png/008-man.png","png/009-girl.png","png/010-man.png","png/006-nurse.png","png/005-woman.png","png/004-man.png","png/001-man.png","png/002-woman.png","png/003-delivery man.png","png/11.png","png/12.png","png/13.png","png/14.png","png/15.png","png/16.png","png/17.png","png/18.png","png/19.png","png/20.png","png/21.png","png/22.png","png/23.png","png/24.png","png/25.png","png/26.png","png/27.png","png/28.png","png/29.png","png/30.png");
 function choosePic() {
   var randomNum = Math.floor(Math.random() * myPix.length);
   document.getElementById("myPicture").src = myPix[randomNum];
   imgadd = document.getElementById("myPicture").src;
+  document.getElementById("myPicture1").src = document.getElementById("myPicture").src;
 }
 
 var currentRoom = "global";
@@ -81,7 +82,7 @@ socket.on("imgsrc1", function(imgadds) {
   for (var imsr in imgadds) {
     if(j<6){
       uname = uv[j];
-      imgsrc.innerHTML += "<img src=\""+imsr+"\" id=\"myPicture\" width=\"50px\" height=\"50px\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\""+uname+"\">";//+" "+user;//"<img src=\"png/001-man.png\" id=\"myPicture\" width=\"50px\" height=\"50px\">"+user;
+      imgsrc.innerHTML += "<img src=\""+imsr+"\" width=\"50px\" height=\"50px\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\""+uname+"\">";//+" "+user;//"<img src=\"png/001-man.png\" id=\"myPicture\" width=\"50px\" height=\"50px\">"+user;
     }
     j++;
   }
