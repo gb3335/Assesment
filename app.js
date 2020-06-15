@@ -55,15 +55,15 @@ var server1 = app.listen(PORT, console.log(`Server started on Port ${PORT}`));
 var io = socket(server1);
 
 var usernames = {};
+var counts=0;
 var imgadds = {};
 var rooms = ["global", "chess", "video-games"];
 io.on("connection", function(socket) {
 
-  console.log("User connected to server.");
-
 //socket
 socket.on("createUser", function(username) {
     socket.username = username;
+    console.log(username+" connected to server");
     usernames[username] = username;
     socket.currentRoom = "global";
     socket.join("global");
@@ -75,13 +75,19 @@ socket.on("createUser", function(username) {
     socket.emit("updateRooms", rooms, "global");
   });
 
-  socket.on("imgadd", function(data) {
-    socket.data=data;
-    imgadds[data]= data;
+  socket.on("imgadd", function(imdata) {
+    socket.imdata=imdata;
+    imgadds[imdata]= imdata;
     socket.broadcast
       .to("global")
-      .emit("updateChat", "INFO", data + " has joined global room");
+      .emit("updateChat", "INFO", imdata + " has joined global room");
     io.sockets.emit("imgsrc1", imgadds);
+  });
+
+  socket.on("count", function(cnt) {
+    socket.cnt=cnt;
+    counts= counts + cnt;
+    io.sockets.emit("countinc", counts);
   });
   socket.on("sendMessage", function(data) {
     io.sockets
@@ -107,6 +113,7 @@ socket.on("createUser", function(username) {
       .emit("updateChat", "INFO", socket.username + " has joined " + room + " room");
   });
   socket.on("disconnect", function() {
+    console.log(usernames[socket.username]+" has disconnected");
     delete usernames[socket.username];
     io.sockets.emit("updateUsers", usernames);
     socket.broadcast.emit("updateChat", "INFO", socket.username + " has disconnected");
