@@ -22,4 +22,4 @@ Requirment:
 
 Link: https://assisment-1.herokuapp.com/
 
-![alt text](https://github.com/gb3335/Assesment/blob/master/Screenshot%202020-06-15%20at%203.22.20%20AM.png?raw=true)
+![alt text](https://github.com/gb3335/Assesment/blob/master/Screenshot%202020-06-15%20at%2011.22.50%20PM.png?raw=true)
