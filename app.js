@@ -57,6 +57,7 @@ var io = socket(server1);
 var usernames = {};
 var counts=0;
 var imgadds = {};
+var his = {};
 var rooms = ["global", "chess", "video-games"];
 io.on("connection", function(socket) {
 
@@ -75,6 +76,12 @@ socket.on("createUser", function(username) {
     socket.emit("updateRooms", rooms, "global");
   });
 
+  socket.on("history", function(histor) {
+      socket.histor = histor;
+      his[histor] = histor;
+      io.sockets.emit("historyTotal", his);
+    });
+
   socket.on("imgadd", function(imdata) {
     socket.imdata=imdata;
     imgadds[imdata]= imdata;
@@ -86,7 +93,8 @@ socket.on("createUser", function(username) {
 
   socket.on("count", function(cnt) {
     socket.cnt=cnt;
-    counts= counts + cnt;
+
+    counts= Object.keys(usernames).length;//counts + cnt;
     io.sockets.emit("countinc", counts);
   });
   socket.on("sendMessage", function(data) {
@@ -115,7 +123,11 @@ socket.on("createUser", function(username) {
   socket.on("disconnect", function() {
     console.log(usernames[socket.username]+" has disconnected");
     delete usernames[socket.username];
+    delete imgadds[socket.imdata];
+    counts= Object.keys(usernames).length;//counts + cnt;
+    io.sockets.emit("countinc", counts);
     io.sockets.emit("updateUsers", usernames);
+    io.sockets.emit("imgsrc1", imgadds);
     socket.broadcast.emit("updateChat", "INFO", socket.username + " has disconnected");
   });
 });
