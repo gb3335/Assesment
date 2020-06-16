@@ -7,6 +7,8 @@
           <span><center><h1 class="mt-4">Dashboard</h1><p class="lead mb-3">Welcome <%= name %></p></center></span>
         </div>
         <a style="float:right;margin-left:5px" class="active" href="#share"><i class="fas fa-link"></i> Share</a>
+        <div onclick="hist()" style="float:right;margin-left:5px" class="dot"><center><h4 style="margin-top:10px; color:#f2f2f2" id="history"><i class="fas fa-chart-line"></i></h4></center></div>
+
         <span style="float:right;margin-left:5px" class="dot"><center><h4 style="margin-top:10px; color:#f2f2f2" id="count">0</h4></center></span>
 
         <span style="float:right;padding-left: 15px" id="imgsrc"></span>
@@ -30,14 +32,17 @@
           <p>Active Users List</p>
           <ul id="userlist1"></ul>
         </div>
-        <div style="display:none" id="char-area" class="col-9">
-          <div class="row col-12">
+        <div style="width:100%" id="char-area" class="col-9">
+          <div style="display:none" class="row col-12">
             <div id="chat-display" class="col-12">
               <div id="msg"></div>
             </div>
           </div>
+          <div style="display:none" id="myDIV" >
+            <span><center><h1 >History</h1></center><br><p id="historytotal"></p></span>
+          </div>
 
-          <div class="row col-12">
+          <div style="display:none" class="row col-12">
             <input
               class="col-10"
               type="text"
