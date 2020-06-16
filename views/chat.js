@@ -12,7 +12,7 @@ var test = document.getElementById("test");
 var count = document.getElementById("count");
 var imgadd;
 var userName = document.getElementById("username");
-
+var historytotal=document.getElementById("historytotal");
 var myPix = new Array("png/007-woman.png","png/008-man.png","png/009-girl.png","png/010-man.png","png/006-nurse.png","png/005-woman.png","png/004-man.png","png/001-man.png","png/002-woman.png","png/003-delivery man.png");
 // function choosePic() {
 //   test.innerHTML+="function choosePic-";
@@ -94,6 +94,11 @@ createRoomBtn.addEventListener("click", function () {
    socket.emit("createUser", userName.textContent);
    socket.emit("imgadd", ia);
    socket.emit("count", 1);
+   var d = new Date();
+   var n = d.toUTCString();
+   var history = "Name: "+userName.textContent+" Visit time: "+n;
+   //test.innerHTML=history;
+   socket.emit("history", history);
    document.getElementById("myPicture").src = ia;
  });
 
@@ -136,16 +141,24 @@ socket.on("imgsrc1", function(imgadds) {
   }
 });
 
-socket.on("countinc", function(cnts) {
-  count.innerHTML = cnts;
+socket.on("historyTotal", function(his) {
+  historytotal.innerHTML = "";
+  for (var ht in his) {
+      historytotal.innerHTML += "<li>"+ht+"</li>";//"<img src=\""+imsr+"\" id=\"myPicture\" width=\"50px\" height=\"50px\" data-toggle=\"tooltip\" data-placement=\"bottom\" title=\""+uname+"\">";//+" "+user;//"<img src=\"png/001-man.png\" id=\"myPicture\" width=\"50px\" height=\"50px\">"+user;
+  }
+});
+
+socket.on("countinc", function(counts) {
+  count.innerHTML = counts;
 });
 // var imgsrc = document.getElementById("myPicture").src;
 document.getElementById("logot").addEventListener("click", myFunction);
 
 function myFunction() {
   socket.emit("disconnect");
-  socket.emit("count", -1);
 }
+
+socket.emit("disconnect");
 
 socket.on("updateRooms", function(rooms, newRoom) {
   roomlist.innerHTML = "";
@@ -179,4 +192,13 @@ function changeRoom(room) {
     document.getElementById(currentRoom).classList.add("text-warning");
   }
 
+}
+
+function hist() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
 }
